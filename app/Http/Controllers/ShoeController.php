@@ -15,7 +15,9 @@ class ShoeController extends Controller
      */
     public function index()
     {
-        return Shoe::all();
+        //return Shoe::all();
+        $data = Shoe::paginate(6);
+        return response()->json($data);
     }
 
     /**
