@@ -27,7 +27,7 @@ class ColorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'number' => 'required'
+            'name' => 'required'
         ]);
 
         return Color::create($request->all());

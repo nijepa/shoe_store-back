@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Shoe_category;
+
 class Shoe_categoryController extends Controller
 {
     /**
@@ -13,7 +15,7 @@ class Shoe_categoryController extends Controller
      */
     public function index()
     {
-        return Size::all();
+        return Shoe_category::all();
     }
 
     /**
@@ -25,10 +27,10 @@ class Shoe_categoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'number' => 'required'
+            'name' => 'required'
         ]);
 
-        return Size::create($request->all());
+        return Shoe_category::create($request->all());
     }
 
     /**
@@ -39,7 +41,7 @@ class Shoe_categoryController extends Controller
      */
     public function show($id)
     {
-        return Size::find($id);
+        return Shoe_category::find($id);
     }
 
     /**
@@ -51,9 +53,9 @@ class Shoe_categoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $size = Size::find($id);
-        $size->update($request->all());
-        return $size;
+        $category = Shoe_category::find($id);
+        $category->update($request->all());
+        return $category;
     }
 
     /**
@@ -64,6 +66,6 @@ class Shoe_categoryController extends Controller
      */
     public function destroy($id)
     {
-        return Size::destroy($id);
+        return Shoe_category::destroy($id);
     }
 }

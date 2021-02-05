@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Shoe_brand;
+
 class Shoe_brandController extends Controller
 {
     /**
@@ -13,7 +15,7 @@ class Shoe_brandController extends Controller
      */
     public function index()
     {
-        //
+        return Shoe_brand::all();
     }
 
     /**
@@ -24,7 +26,11 @@ class Shoe_brandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        return Shoe_brand::create($request->all());
     }
 
     /**
@@ -35,7 +41,7 @@ class Shoe_brandController extends Controller
      */
     public function show($id)
     {
-        //
+        return Shoe_brand::find($id);
     }
 
     /**
@@ -47,7 +53,9 @@ class Shoe_brandController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $brand = Shoe_brand::find($id);
+        $brand->update($request->all());
+        return $brand;
     }
 
     /**
@@ -58,6 +66,6 @@ class Shoe_brandController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return Shoe_brand::destroy($id);
     }
 }

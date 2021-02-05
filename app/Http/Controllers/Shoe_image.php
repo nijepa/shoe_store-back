@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Shoe_color;
+use App\Models\Shoe_image;
 
-class Shoe_colorController extends Controller
+class Shoe_imageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class Shoe_colorController extends Controller
      */
     public function index()
     {
-        return Shoe_color::all();
+        return Shoe_image::all();
     }
 
     /**
@@ -27,10 +27,11 @@ class Shoe_colorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'shoe_specific_id' => 'required'
+            'shoe_specific_id' => 'required',
+            'image' => 'required'
         ]);
 
-        return Shoe_color::create($request->all());
+        return Shoe_image::create($request->all());
     }
 
     /**
@@ -41,7 +42,7 @@ class Shoe_colorController extends Controller
      */
     public function show($id)
     {
-        return Shoe_color::find($id);
+        return Shoe_image::find($id);
     }
 
     /**
@@ -53,9 +54,9 @@ class Shoe_colorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $color = Shoe_color::find($id);
-        $color->update($request->all());
-        return $color;
+        $image = Shoe_image::find($id);
+        $image->update($request->all());
+        return $image;
     }
 
     /**
@@ -66,6 +67,6 @@ class Shoe_colorController extends Controller
      */
     public function destroy($id)
     {
-        return Shoe_color::destroy($id);
+        return Shoe_image::destroy($id);
     }
 }

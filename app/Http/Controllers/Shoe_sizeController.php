@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Shoe_size;
+
 class Shoe_sizeController extends Controller
 {
     /**
@@ -13,7 +15,7 @@ class Shoe_sizeController extends Controller
      */
     public function index()
     {
-        //
+        return Shoe_size::all();
     }
 
     /**
@@ -24,7 +26,11 @@ class Shoe_sizeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'shoe_specific_id' => 'required'
+        ]);
+
+        return Shoe_size::create($request->all());
     }
 
     /**
@@ -35,7 +41,7 @@ class Shoe_sizeController extends Controller
      */
     public function show($id)
     {
-        //
+        return Shoe_size::find($id);
     }
 
     /**
@@ -47,7 +53,9 @@ class Shoe_sizeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $size = Shoe_size::find($id);
+        $size->update($request->all());
+        return $size;
     }
 
     /**
@@ -58,6 +66,6 @@ class Shoe_sizeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return Shoe_size::destroy($id);
     }
 }
