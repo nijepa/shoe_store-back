@@ -11,11 +11,12 @@ class Shoe extends Model
 
     protected $fillable = [
         'title',
-        'slug',
         'description',
         'price',
         'stock',
-        'image'
+        'image',
+        'category_id',
+        'brand_id'
     ];
 
     /**
@@ -26,5 +27,25 @@ class Shoe extends Model
     public function orderDetail()
     {
         return $this->hasMany(Order_detail::class);
+    }
+
+    /**
+     * Relationship to category
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category()
+    {
+        return $this->belongsTo(Shoe_category::class);
+    }
+
+    /**
+     * Relationship to brand
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function brand()
+    {
+        return $this->belongsTo(Shoe_brand::class);
     }
 }
