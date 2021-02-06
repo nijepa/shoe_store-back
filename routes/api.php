@@ -35,6 +35,10 @@ Route::prefix('v1')->group(function() {
     Route::apiResource('images', Shoe_imageController::class);
     Route::apiResource('sizes', SizeController::class);
     Route::apiResource('colors', ColorController::class);
+    Route::get(
+        '/pag/{id}',
+        [ShoeController::class, 'pag']
+    )->name('pag');
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

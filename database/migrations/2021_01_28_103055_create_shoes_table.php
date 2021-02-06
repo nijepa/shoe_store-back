@@ -16,6 +16,7 @@ class CreateShoesTable extends Migration
         Schema::create('shoes', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('short_description')->nullable();
             $table->text('description')->nullable();
             $table->string('image')->nullable();
             $table->float('price')->default(0);

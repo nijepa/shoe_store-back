@@ -20,6 +20,13 @@ class ShoeController extends Controller
         return response()->json($data);
     }
 
+    public function pag($nr)
+    {
+        //return Shoe::all();
+        $data = Shoe::paginate($nr);
+        return response()->json($data);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

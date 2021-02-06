@@ -66,6 +66,8 @@ class Shoe_brandController extends Controller
      */
     public function destroy($id)
     {
-        return Shoe_brand::destroy($id);
+        $brand = Shoe_brand::find($id);
+        Shoe_brand::destroy($id);
+        return $brand;
     }
 }

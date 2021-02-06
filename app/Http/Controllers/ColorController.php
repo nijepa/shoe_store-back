@@ -66,6 +66,8 @@ class ColorController extends Controller
      */
     public function destroy($id)
     {
-        return Color::destroy($id);
+        $color = Color::find($id);
+        Color::destroy($id);
+        return $color;
     }
 }

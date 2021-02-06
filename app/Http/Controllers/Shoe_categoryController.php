@@ -66,6 +66,8 @@ class Shoe_categoryController extends Controller
      */
     public function destroy($id)
     {
-        return Shoe_category::destroy($id);
+        $category = Shoe_category::find($id);
+        Shoe_category::destroy($id);
+        return $category;
     }
 }

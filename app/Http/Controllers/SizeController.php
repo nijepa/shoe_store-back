@@ -66,6 +66,8 @@ class SizeController extends Controller
      */
     public function destroy($id)
     {
-        return Size::destroy($id);
+        $size = Size::find($id);
+        Size::destroy($id);
+        return $size;
     }
 }
