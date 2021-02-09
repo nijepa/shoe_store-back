@@ -39,6 +39,10 @@ Route::prefix('v1')->group(function() {
         '/pag/{id}',
         [ShoeController::class, 'pag']
     )->name('pag');
+    Route::get(
+        '/shoespecs/{id}',
+        [Shoe_specificController::class, 'shoespecs']
+    )->name('shoespecs');
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

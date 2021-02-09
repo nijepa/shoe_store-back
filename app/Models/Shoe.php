@@ -31,6 +31,16 @@ class Shoe extends Model
     }
 
     /**
+     * Relationship to order details
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function shoe_specific()
+    {
+        return $this->hasMany(Shoe_specific::class);
+    }
+
+    /**
      * Relationship to category
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

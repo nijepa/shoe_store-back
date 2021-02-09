@@ -18,8 +18,8 @@ class Size extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function shoe_size()
+    public function shoe_specific()
     {
-        return $this->belongsTo(Shoe_size::class);
+        return $this->belongsTo(Shoe_specific::class);
     }
 }

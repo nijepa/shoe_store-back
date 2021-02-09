@@ -18,8 +18,8 @@ class Color extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function shoe_color()
+/*     public function shoe_specific()
     {
-        return $this->belongsTo(Shoe_color::class);
-    }
+        return $this->belongsTo(Shoe_specific::class);
+    } */
 }

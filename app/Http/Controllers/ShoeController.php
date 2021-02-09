@@ -13,7 +13,7 @@ class ShoeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index1()
     {
         //return Shoe::all();
         $data = Shoe::paginate(6);
@@ -24,6 +24,13 @@ class ShoeController extends Controller
     {
         //return Shoe::all();
         $data = Shoe::paginate($nr);
+        return response()->json($data);
+    }
+
+    public function index()
+    {
+        //return Shoe::all();
+        $data = Shoe::with(['category', 'brand'])->paginate(6);
         return response()->json($data);
     }
 
@@ -50,7 +57,7 @@ class ShoeController extends Controller
      */
     public function show($id)
     {
-        return Shoe::find($id);
+        return Shoe::with(['category', 'brand'])->find($id);
     }
 
     /**

@@ -15,7 +15,9 @@ class Shoe_specificController extends Controller
      */
     public function index()
     {
-        return Shoe_specific::all();
+        //return Shoe_specific::all();
+        $data = Shoe_specific::with(['shoe', 'color', 'size'])->paginate(6);
+        return response()->json($data);
     }
 
     /**
@@ -42,6 +44,11 @@ class Shoe_specificController extends Controller
     public function show($id)
     {
         return Shoe_specific::find($id);
+    }
+
+    public function shoespecs($id)
+    {
+        return Shoe_specific::find('shoe_id' === $id);
     }
 
     /**

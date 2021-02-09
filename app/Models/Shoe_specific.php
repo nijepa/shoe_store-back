@@ -23,9 +23,9 @@ class Shoe_specific extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function shoe_sizes()
+    public function size()
     {
-        return $this->hasMany(Shoe_size::class);
+        return $this->belongsTo(Size::class);
     }
 
     /**
@@ -33,9 +33,9 @@ class Shoe_specific extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function shoe_colors()
+    public function color()
     {
-        return $this->hasMany(Shoe_color::class);
+        return $this->belongsTo(Color::class);
     }
 
     /**
@@ -43,8 +43,8 @@ class Shoe_specific extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function shoes()
+    public function shoe()
     {
-        return $this->hasMany(Shoe::class);
+        return $this->belongsTo(Shoe::class);
     }
 }
