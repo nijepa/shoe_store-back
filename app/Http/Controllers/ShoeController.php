@@ -13,24 +13,45 @@ class ShoeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index1()
-    {
-        //return Shoe::all();
-        $data = Shoe::paginate(6);
-        return response()->json($data);
-    }
-
-    public function pag($nr)
-    {
-        //return Shoe::all();
-        $data = Shoe::paginate($nr);
-        return response()->json($data);
-    }
-
     public function index()
     {
         //return Shoe::all();
-        $data = Shoe::with(['category', 'brand'])->paginate(6);
+        //$data = Shoe::paginate(6);
+        $data = Shoe::orderBy('title', 'asc')
+            ->paginate(6);
+        return response()->json($data);
+    }
+
+    public function list1()
+    {
+        //$data = Shoe::with(['category', 'brand'])->paginate(6);
+        $data = Shoe::with(['category', 'brand'])
+        ->orderBy(
+            'title', 'asc'
+        )->paginate(6);
+        return response()->json($data);
+    }
+
+    public function list(Request $request)
+    {
+        $nr = $request->get('nr');
+        //$col = $request->get('col');
+        if ($request->get('col') == null) {
+            $col = "title";
+        } else {
+            $col = $request->get('col');
+        } ;
+        if ($request->get('order') == null) {
+            $order = "asc";
+        } else {
+            $order = $request->get('order');
+        } ;
+        $search = $request->get('search');
+
+        $data = Shoe::with(['category', 'brand'])
+            ->orderBy($col, $order)
+            ->where('title', 'like', '%' .$search . '%')
+            ->paginate($nr);
         return response()->json($data);
     }
 
@@ -82,6 +103,9 @@ class ShoeController extends Controller
      */
     public function destroy($id)
     {
-        return Shoe::destroy($id);
+        //return Shoe::destroy($id);
+        $shoe = Shoe::find($id);
+        Shoe::destroy($id);
+        return $shoe;
     }
 }

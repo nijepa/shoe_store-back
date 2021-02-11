@@ -35,10 +35,10 @@ Route::prefix('v1')->group(function() {
     Route::apiResource('images', Shoe_imageController::class);
     Route::apiResource('sizes', SizeController::class);
     Route::apiResource('colors', ColorController::class);
-    Route::get(
-        '/pag/{id}',
-        [ShoeController::class, 'pag']
-    )->name('pag');
+    Route::post(
+        '/list',
+        [ShoeController::class, 'list']
+    );
     Route::get(
         '/shoespecs/{id}',
         [Shoe_specificController::class, 'shoespecs']

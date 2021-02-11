@@ -12,14 +12,4 @@ class Size extends Model
     protected $fillable = [
         'number'
     ];
-
-    /**
-     * Relationship to shoe size
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function shoe_specific()
-    {
-        return $this->belongsTo(Shoe_specific::class);
-    }
 }

@@ -12,14 +12,4 @@ class Color extends Model
     protected $fillable = [
         'name'
     ];
-
-    /**
-     * Relationship to shoe color
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-/*     public function shoe_specific()
-    {
-        return $this->belongsTo(Shoe_specific::class);
-    } */
 }

@@ -32,7 +32,10 @@ class Shoe_specificController extends Controller
             'shoe_id' => 'required'
         ]);
 
-        return Shoe_specific::create($request->all());
+        //return Shoe_specific::create($request->all());
+        $newShoe = Shoe_specific::create($request->all());
+        $id = $newShoe->only('id');
+        return $newShoe::with(['shoe', 'color', 'size'])->where('id', $id)->get();
     }
 
     /**
@@ -43,12 +46,12 @@ class Shoe_specificController extends Controller
      */
     public function show($id)
     {
-        return Shoe_specific::find($id);
+        return Shoe_specific::with(['shoe', 'color', 'size'])->find($id);
     }
 
     public function shoespecs($id)
     {
-        return Shoe_specific::find('shoe_id' === $id);
+        return Shoe_specific::where('shoe_id', $id)->get();
     }
 
     /**
@@ -73,6 +76,9 @@ class Shoe_specificController extends Controller
      */
     public function destroy($id)
     {
-        return Shoe_specific::destroy($id);
+        //return Shoe_specific::destroy($id);
+        $specific = Shoe_specific::find($id);
+        Shoe_specific::destroy($id);
+        return $specific;
     }
 }

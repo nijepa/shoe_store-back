@@ -19,7 +19,7 @@ class Shoe_specific extends Model
     ];
 
     /**
-     * Relationship to shoe sizes
+     * Relationship to size
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -29,7 +29,7 @@ class Shoe_specific extends Model
     }
 
     /**
-     * Relationship to shoe colors
+     * Relationship to color
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -39,7 +39,7 @@ class Shoe_specific extends Model
     }
 
     /**
-     * Relationship to shoes
+     * Relationship to shoe
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
