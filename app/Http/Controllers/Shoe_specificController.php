@@ -20,6 +20,29 @@ class Shoe_specificController extends Controller
         return response()->json($data);
     }
 
+    public function speclist(Request $request)
+    {
+        $nr = $request->get('nr');
+        //$col = $request->get('col');
+        if ($request->get('col') == null) {
+            $col = "title";
+        } else {
+            $col = $request->get('col');
+        } ;
+        if ($request->get('order') == null) {
+            $order = "asc";
+        } else {
+            $order = $request->get('order');
+        } ;
+        $search = $request->get('search');
+
+        $data = Shoe_specific::with(['shoe', 'color', 'size'])
+            ->orderBy($col, $order)
+            ->where('title', 'like', '%' .$search . '%')
+            ->paginate($nr);
+        return response()->json($data);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -51,7 +74,8 @@ class Shoe_specificController extends Controller
 
     public function shoespecs($id)
     {
-        return Shoe_specific::where('shoe_id', $id)->get();
+        $data = Shoe_specific::where('shoe_id', $id)->with(['shoe', 'color', 'size'])->paginate(6);
+        return response()->json($data);
     }
 
     /**

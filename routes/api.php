@@ -39,6 +39,10 @@ Route::prefix('v1')->group(function() {
         '/list',
         [ShoeController::class, 'list']
     );
+    Route::post(
+        '/speclist',
+        [Shoe_specificController::class, 'speclist']
+    );
     Route::get(
         '/shoespecs/{id}',
         [Shoe_specificController::class, 'shoespecs']
