@@ -18,6 +18,28 @@ class Shoe_categoryController extends Controller
         return Shoe_category::all();
     }
 
+    public function categorieslist(Request $request)
+    {
+        $nr = $request->get('nr');
+        //$col = $request->get('col');
+        if ($request->get('col') == null) {
+            $col = "name";
+        } else {
+            $col = $request->get('col');
+        } ;
+        if ($request->get('order') == null) {
+            $order = "asc";
+        } else {
+            $order = $request->get('order');
+        } ;
+        $search = $request->get('search');
+
+        $data = Shoe_category::orderBy($col, $order)
+            ->where('name', 'like', '%' .$search . '%')
+            ->paginate($nr);
+        return response()->json($data);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

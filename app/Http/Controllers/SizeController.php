@@ -18,6 +18,28 @@ class SizeController extends Controller
         return Size::all();
     }
 
+    public function sizeslist(Request $request)
+    {
+        $nr = $request->get('nr');
+        //$col = $request->get('col');
+        if ($request->get('col') == null) {
+            $col = "number";
+        } else {
+            $col = $request->get('col');
+        } ;
+        if ($request->get('order') == null) {
+            $order = "asc";
+        } else {
+            $order = $request->get('order');
+        } ;
+        $search = $request->get('search');
+
+        $data = Size::orderBy($col, $order)
+            ->where('number', 'like', '%' .$search . '%')
+            ->paginate($nr);
+        return response()->json($data);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

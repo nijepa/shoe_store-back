@@ -12,6 +12,7 @@ use App\Http\Controllers\Shoe_sizeController;
 use App\Http\Controllers\Shoe_colorController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\ColorController;
+use App\Http\Controllers\AuthController;
 
 
 /*
@@ -43,6 +44,22 @@ Route::prefix('v1')->group(function() {
         '/speclist',
         [Shoe_specificController::class, 'speclist']
     );
+    Route::post(
+        '/colorslist',
+        [ColorController::class, 'colorslist']
+    );
+    Route::post(
+        '/sizeslist',
+        [SizeController::class, 'sizeslist']
+    );
+    Route::post(
+        '/categorieslist',
+        [Shoe_categoryController::class, 'categorieslist']
+    );
+    Route::post(
+        '/brandslist',
+        [Shoe_brandController::class, 'brandslist']
+    );
     Route::get(
         '/shoespecs/{id}',
         [Shoe_specificController::class, 'shoespecs']
@@ -51,4 +68,10 @@ Route::prefix('v1')->group(function() {
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::group(['middleware' => 'auth.api'], function() {
+    Route::get('/logout', [AuthController::class,'logout']);
 });
