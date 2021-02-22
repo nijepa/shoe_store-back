@@ -13,6 +13,7 @@ use App\Http\Controllers\Shoe_colorController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RegisterController;
 
 
 /*
@@ -27,15 +28,22 @@ use App\Http\Controllers\AuthController;
 */
 
 Route::prefix('v1')->group(function() {
-    Route::apiResource('shoes', ShoeController::class);
-    Route::apiResource('specifics', Shoe_specificController::class);
-    Route::apiResource('categories', Shoe_categoryController::class);
-    Route::apiResource('brands', Shoe_brandController::class);
-    Route::apiResource('shoes_sizes', Shoe_sizeController::class);
-    Route::apiResource('shoes_colors', Shoe_colorController::class);
-    Route::apiResource('images', Shoe_imageController::class);
-    Route::apiResource('sizes', SizeController::class);
-    Route::apiResource('colors', ColorController::class);
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+    Route::group(['middleware' => 'auth:api'], function() {
+        Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+        Route::apiResource('colors', ColorController::class);
+        Route::apiResource('shoes', ShoeController::class);
+        Route::apiResource('specifics', Shoe_specificController::class);
+        Route::apiResource('categories', Shoe_categoryController::class);
+        Route::apiResource('brands', Shoe_brandController::class);
+        Route::apiResource('shoes_sizes', Shoe_sizeController::class);
+        Route::apiResource('shoes_colors', Shoe_colorController::class);
+        Route::apiResource('images', Shoe_imageController::class);
+        Route::apiResource('sizes', SizeController::class);
+    });
+
     Route::post(
         '/list',
         [ShoeController::class, 'list']
@@ -66,12 +74,15 @@ Route::prefix('v1')->group(function() {
     )->name('shoespecs');
 });
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+/* Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-});
+}); */
 
-Route::post('/login', [AuthController::class, 'login']);
+/* Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::group(['middleware' => 'auth.api'], function() {
-    Route::get('/logout', [AuthController::class,'logout']);
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::apiResource('colors', ColorController::class);
 });
+
+Route::post('/register', [RegisterController::class, 'register']); */

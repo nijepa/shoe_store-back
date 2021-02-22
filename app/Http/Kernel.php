@@ -51,7 +51,7 @@ class Kernel extends HttpKernel
         'auth.api' => [
             \App\Http\Middleware\AddAuthHeader::class,
             'throttle:60,1',
-            'bindings',
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
             'auth:api',
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
         ],
